@@ -1,0 +1,5 @@
+<ng-container *ngIf="showError">
+    <mat-error *ngFor="let error of listOfErrors()" class="errorMessage">
+        {{error}}
+    </mat-error>
+</ng-container>

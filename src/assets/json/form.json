@@ -1,0 +1,61 @@
+{
+    "controls": [
+        {
+            "name": "firstName",
+            "label": "First name:",
+            "value": "",
+            "type": "text",
+            "validators": {
+                "required": true,
+                "minLength": 5
+            }
+        },
+        {
+            "name": "secondName",
+            "label": "Second name:",
+            "value": "",
+            "type": "text",
+            "validators": {
+                "required": true
+            }
+        },
+        {
+            "name": "comments",
+            "label": "Comments",
+            "value": "",
+            "type": "textarea",
+            "validators": {
+                "maxLength": 200
+            }
+        },
+        {
+            "name": "terms",
+            "label": "Do you agree with the terms?",
+            "value": ["yes"],
+            "type": "checkbox",
+            "options": [
+                {"key": "yes", "label": "Yes"},
+                {"key": "no", "label": "No"}
+            ],
+            "validators": {}
+        },
+        {
+            "name": "gender",
+            "label": "Gender",
+            "value": "false",
+            "type": "radio",
+            "options": [
+                { "key": "male", "label": "Male" },
+                { "key": "female", "label": "Female" }
+            ],
+            "validators": {}
+        },
+        {   
+            "name": "text",
+            "label": "This is a plain text",
+            "value": "",
+            "type": "plainText",
+            "validators": {}
+        }
+    ]
+}

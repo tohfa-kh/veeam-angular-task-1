@@ -1,0 +1,47 @@
+<ng-container *ngIf="jsonDataForControls$ | async as jsonDataForControls">
+    <div class="column col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex flex-column justify-content-center align-items-center mt-5 mb-5">
+        <form [formGroup]="newDynamicForm">
+            <ng-container *ngIf="jsonDataForControls.controls">
+                <div *ngFor="let control of jsonDataForControls.controls">
+                    <div>
+                        <mat-form-field appearance="fill"
+                        *ngIf="
+                            [
+                            'text',
+                            'password',
+                            'email',
+                            'number',
+                            'search',
+                            'tel',
+                            'url'
+                            ].includes(control.type)" 
+                        >
+                        <mat-label>{{ control.label }}</mat-label>
+                        <input  matInput type="control.type" [formControlName]="control.name" >
+                        <app-error-controller [control]="newDynamicForm.controls[control.name]" [showError]="newDynamicForm.controls[control.name].touched && !newDynamicForm.controls[control.name].valid"></app-error-controller>
+                    </mat-form-field>
+                    </div>
+                    <mat-form-field appearance="fill" *ngIf="control.type === 'textarea'" >
+                        <mat-label>{{ control.label }}</mat-label>
+                        <textarea matInput [formControlName]="control.name" type="control.type"></textarea>
+                        <app-error-controller [control]="newDynamicForm.controls[control.name]" [showError]="!newDynamicForm.controls[control.name].valid"></app-error-controller>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" *ngIf="control.type === 'checkbox'">
+                        <mat-label>{{ control.label }}</mat-label>
+                        <mat-select [formControlName]="control.name" multiple>
+                            <mat-option *ngFor="let option of control.options" [value]="option.key">{{ option.label }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-radio-group aria-label="Select an option" class="radio-button" [formControlName]="control.name" *ngIf="control.type === 'radio'" class="radio-group">
+                        <label class="radio-label">{{ control.label }}</label>
+                        <mat-radio-button  *ngFor="let option of control.options" [value]="option.key">{{ option.label }}</mat-radio-button>
+                    </mat-radio-group>
+                    <P *ngIf="control.type === 'plainText'">{{ control.label }}</P>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+                </div>
+            </ng-container>
+        </form>
+    </div>
+</ng-container>
